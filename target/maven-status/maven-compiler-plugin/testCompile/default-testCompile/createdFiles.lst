@@ -1,0 +1,4 @@
+com\adaptpqc\crypto\AesGcmTest.class
+com\adaptpqc\crypto\KemTest.class
+com\adaptpqc\crypto\HkdfTest.class
+com\adaptpqc\crypto\PqcCryptoIntegrationTest.class

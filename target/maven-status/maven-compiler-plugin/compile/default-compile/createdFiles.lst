@@ -1,0 +1,8 @@
+com\adaptpqc\crypto\KemKeyPair.class
+com\adaptpqc\crypto\CryptoSession.class
+com\adaptpqc\crypto\KemManager.class
+com\adaptpqc\crypto\AesGcmManager.class
+com\adaptpqc\crypto\EncryptedMessage.class
+com\adaptpqc\Main.class
+com\adaptpqc\crypto\HkdfManager.class
+com\adaptpqc\crypto\KemEncapsulationResult.class
