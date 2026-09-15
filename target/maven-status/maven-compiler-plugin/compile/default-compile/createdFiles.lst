@@ -6,3 +6,7 @@ com\adaptpqc\crypto\EncryptedMessage.class
 com\adaptpqc\Main.class
 com\adaptpqc\crypto\HkdfManager.class
 com\adaptpqc\crypto\KemEncapsulationResult.class
+com\adaptpqc\security\SecurityEventType.class
+com\adaptpqc\session\SessionState.class
+com\adaptpqc\security\SecurityEvent.class
+com\adaptpqc\security\SecurityState.class

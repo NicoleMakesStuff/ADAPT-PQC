@@ -1,4 +1,5 @@
 com\adaptpqc\crypto\AesGcmTest.class
 com\adaptpqc\crypto\KemTest.class
 com\adaptpqc\crypto\HkdfTest.class
+com\adaptpqc\session\SessionStateTest.class
 com\adaptpqc\crypto\PqcCryptoIntegrationTest.class

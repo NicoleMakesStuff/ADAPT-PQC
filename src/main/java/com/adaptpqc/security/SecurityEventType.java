@@ -1,0 +1,18 @@
+package com.adaptpqc.security;
+
+public enum SecurityEventType {
+
+    REPLAY_ATTEMPT,
+
+    CIPHERTEXT_TAMPERING,
+
+    INVALID_SIGNATURE,
+
+    AUTHENTICATION_FAILURE,
+
+    TRAFFIC_ANOMALY,
+
+    KEY_AGE_THRESHOLD,
+
+    MESSAGE_COUNT_THRESHOLD
+}
