@@ -23,4 +23,17 @@ public final class ProtocolTestSupport {
                 alteredTag
         );
     }
+
+    public static SecureMessage withGeneration(
+            SecureMessage original,
+            int generation) {
+
+        return new SecureMessage(
+                original.sessionId(),
+                original.sequenceNumber(),
+                generation,
+                original.payload(),
+                original.authenticationTag()
+        );
+    }
 }

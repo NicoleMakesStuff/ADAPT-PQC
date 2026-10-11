@@ -1,6 +1,8 @@
 
 package com.adaptpqc.evaluation;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public final class ProtocolEvaluationRunner {
     }
 
     public static void main(String[] args)
-            throws GeneralSecurityException {
+            throws GeneralSecurityException, IOException {
 
         List<TrialOutcome> outcomes = new ArrayList<>();
 
@@ -99,11 +101,6 @@ public final class ProtocolEvaluationRunner {
         SecureMessage originalForTampering =
                 sender.encrypt("Tampering test");
 
-        byte[] modifiedTag =
-                originalForTampering.authenticationTag();
-
-        modifiedTag[0] ^= 0x01;
-
         SecureMessage tampered =
         ProtocolTestSupport.tamperAuthenticationTag(
                 originalForTampering
@@ -164,5 +161,67 @@ public final class ProtocolEvaluationRunner {
                         .filter(o -> !o.attackPresent() && o.detected())
                         .count()
         );
+
+        // Calculate aggregate evaluation metrics.
+        EvaluationMetrics metrics =
+                MetricsCalculator.calculate(outcomes);
+
+        System.out.println();
+        System.out.println("=== Evaluation Metrics ===");
+
+        System.out.println(
+                "True positives: "
+                        + metrics.truePositives());
+
+        System.out.println(
+                "False positives: "
+                        + metrics.falsePositives());
+
+        System.out.println(
+                "True negatives: "
+                        + metrics.trueNegatives());
+
+        System.out.println(
+                "False negatives: "
+                        + metrics.falseNegatives());
+
+        System.out.printf(
+                "Detection rate: %.2f%%%n",
+                metrics.detectionRate() * 100.0);
+
+        System.out.printf(
+                "False-positive rate: %.2f%%%n",
+                metrics.falsePositiveRate() * 100.0);
+
+        System.out.printf(
+                "Precision: %.2f%%%n",
+                metrics.precision() * 100.0);
+
+        System.out.printf(
+                "F1 score: %.4f%n",
+                metrics.f1Score());
+
+        System.out.printf(
+                "Average detection latency: %.3f ms%n",
+                metrics.averageDetectionLatencyMs());
+
+        System.out.println(
+                "Ratchet recommendations: "
+                        + metrics.ratchetRecommendations());
+
+        System.out.println(
+                "Ratchets executed: "
+                        + metrics.ratchetsExecuted());
+
+        Path csvPath = Path.of(
+                "results",
+                "protocol-evaluation.csv"
+        );
+
+        TrialOutcomeCsvExporter.export(outcomes, csvPath);
+
+        System.out.println(
+                "Trial results saved to: "
+                        + csvPath.toAbsolutePath());
     }
 }

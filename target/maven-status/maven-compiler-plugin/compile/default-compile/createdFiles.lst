@@ -2,13 +2,16 @@ com\adaptpqc\protocol\v2\ProtocolCrypto.class
 com\adaptpqc\protocol\v2\ProtocolTestSupport.class
 com\adaptpqc\network\ChatClient.class
 com\adaptpqc\protocol\v2\RatchetFinalAck.class
+com\adaptpqc\security\RejectionEventMapper$1.class
 com\adaptpqc\crypto\HkdfManager.class
 com\adaptpqc\security\SecurityEventType.class
 com\adaptpqc\protocol\v2\ReplayGuard.class
 com\adaptpqc\protocol\v2\ProtocolSession.class
 com\adaptpqc\protocol\v2\SecureMessageWireCodec.class
 com\adaptpqc\protocol\v2\RatchetProtocol$Initiator.class
+com\adaptpqc\evaluation\TrialOutcomeCsvExporter.class
 com\adaptpqc\attack\AttackSimulator.class
+com\adaptpqc\protocol\v2\ProtocolRejectionException.class
 com\adaptpqc\crypto\KemManager.class
 com\adaptpqc\experiment\CsvExperimentExporter.class
 com\adaptpqc\experiment\RealSecurityPipeline.class
@@ -20,6 +23,7 @@ com\adaptpqc\security\RiskEngine.class
 com\adaptpqc\protocol\v2\MessageSequenceTracker.class
 com\adaptpqc\protocol\v2\SecureMessage.class
 com\adaptpqc\evaluation\EvaluationMetrics.class
+com\adaptpqc\security\MonitoredSecureReceiver.class
 com\adaptpqc\protocol\v2\SecureMessageService.class
 com\adaptpqc\protocol\v2\RatchetProtocol$Responder.class
 com\adaptpqc\ratchet\RatchetService.class
@@ -31,6 +35,7 @@ com\adaptpqc\evaluation\ProtocolEvaluationRunner.class
 com\adaptpqc\ratchet\RatchetController.class
 com\adaptpqc\security\SecurityEvent.class
 com\adaptpqc\experiment\AttackExperimentMain.class
+com\adaptpqc\security\RejectionEventMapper.class
 com\adaptpqc\crypto\KemKeyPair.class
 com\adaptpqc\protocol\v2\RatchetProtocol.class
 com\adaptpqc\evaluation\MetricsCalculator.class
@@ -38,6 +43,7 @@ com\adaptpqc\ratchet\RatchetOffer.class
 com\adaptpqc\crypto\KemEncapsulationResult.class
 com\adaptpqc\experiment\AttackExperimentRecord.class
 com\adaptpqc\protocol\RatchetState.class
+com\adaptpqc\security\ReceiveResult.class
 com\adaptpqc\crypto\CryptoSession.class
 com\adaptpqc\protocol\v2\ProtocolCrypto$KeyMaterial.class
 com\adaptpqc\ratchet\PreparedRatchet.class
@@ -52,4 +58,5 @@ com\adaptpqc\protocol\ProtocolMessageType.class
 com\adaptpqc\protocol\v2\ProtocolCrypto$EncryptedPayload.class
 com\adaptpqc\security\SecurityMonitor.class
 com\adaptpqc\experiment\AttackExperimentRunner$SecurityPipeline.class
+com\adaptpqc\protocol\v2\ProtocolRejectionReason.class
 com\adaptpqc\network\MessageCodec.class

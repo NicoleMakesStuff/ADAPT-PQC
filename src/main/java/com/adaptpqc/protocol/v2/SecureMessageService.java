@@ -70,22 +70,26 @@ public final class SecureMessageService {
             SecureMessage message) throws GeneralSecurityException {
 
         if (message == null) {
-            throw new GeneralSecurityException(
+            throw new ProtocolRejectionException(
+                    ProtocolRejectionReason.NULL_MESSAGE,
                     "Message is null");
         }
 
         if (!sessionId.equals(message.sessionId())) {
-            throw new GeneralSecurityException(
+            throw new ProtocolRejectionException(
+                    ProtocolRejectionReason.WRONG_SESSION,
                     "Wrong session ID");
         }
 
         if (message.generation() != session.generation()) {
-            throw new GeneralSecurityException(
+            throw new ProtocolRejectionException(
+                    ProtocolRejectionReason.WRONG_GENERATION,
                     "Wrong key generation");
         }
 
         if (!receiverTracker.isExpected(message.sequenceNumber())) {
-            throw new GeneralSecurityException(
+            throw new ProtocolRejectionException(
+                    ProtocolRejectionReason.REPLAY_OR_OUT_OF_ORDER,
                     "Replay or out-of-order message detected");
         }
 
@@ -94,13 +98,23 @@ public final class SecureMessageService {
                 session.activeAuthKey(),
                 message.authenticatedBytes(),
                 message.authenticationTag())) {
-            throw new GeneralSecurityException(
+            throw new ProtocolRejectionException(
+                    ProtocolRejectionReason.AUTHENTICATION_FAILED,
                     "Message authentication failed");
         }
 
-        String plaintext = session.decrypt(
-                message.payload(),
-                message.generation());
+        String plaintext;
+
+        try {
+            plaintext = session.decrypt(
+                    message.payload(),
+                    message.generation());
+        } catch (GeneralSecurityException e) {
+            throw new ProtocolRejectionException(
+                    ProtocolRejectionReason.DECRYPTION_FAILED,
+                    "Message decryption failed",
+                    e);
+        }
 
         // Advance sequence only after authentication and decryption succeed.
         receiverTracker.markAccepted(message.sequenceNumber());
