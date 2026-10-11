@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.adaptpqc.protocol.v2.SecureMessageWireCodecTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in com.adaptpqc.protocol.v2.SecureMessageWireCodecTest

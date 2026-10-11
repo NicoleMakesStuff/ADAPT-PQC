@@ -10,7 +10,7 @@ public class CryptoSession {
             "ADAPT-PQC-SESSION-AES-256";
 
     private final AesGcmManager aes;
-    private final SecretKey sessionKey;
+    private SecretKey sessionKey;
 
     /**
      * Creates an AES session key from the
@@ -96,4 +96,43 @@ public class CryptoSession {
                 StandardCharsets.UTF_8
         );
     }
+    
+        /**
+         * Replaces the current AES session key using fresh
+         * shared secret material and HKDF.
+         *
+         * Call only when the ratchet protocol authorizes
+         * the key transition.
+         */
+        public synchronized void rotateKey(
+                byte[] sharedSecret,
+                byte[] salt) throws Exception {
+
+        if (sharedSecret == null || sharedSecret.length == 0) {
+                throw new IllegalArgumentException(
+                        "Shared secret cannot be empty."
+                );
+        }
+
+        if (salt == null || salt.length == 0) {
+                throw new IllegalArgumentException(
+                        "Salt cannot be empty."
+                );
+        }
+
+        HkdfManager hkdf = new HkdfManager();
+
+        byte[] keyBytes = hkdf.deriveKey(
+                sharedSecret,
+                salt,
+                HKDF_INFO,
+                32
+        );
+
+        SecretKey newKey = aes.keyFromBytes(keyBytes);
+
+        // Replace the current key only after derivation succeeds.
+        this.sessionKey = newKey;
+        }
+
 }
